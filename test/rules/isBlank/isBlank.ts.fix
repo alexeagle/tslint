@@ -1,0 +1,10 @@
+import {isBlank, other} from './facade_lang';
+
+function foo(a: {}) {
+  if (a) {
+  }
+  !!a;
+  !!(a || {});
+  isBlank("don't change strings");
+}
+

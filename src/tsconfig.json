@@ -6,7 +6,7 @@
         "declaration": true,
         "sourceMap": false,
         "target": "es5",
-        "outDir": "../lib"
+        "outDir": "../build/src"
     },
     "atom": {
         "rewriteTsconfig": false
@@ -85,6 +85,7 @@
         "rules/forinRule.ts",
         "rules/indentRule.ts",
         "rules/interfaceNameRule.ts",
+        "rules/isBlankRule.ts",
         "rules/jsdocFormatRule.ts",
         "rules/labelPositionRule.ts",
         "rules/labelUndefinedRule.ts",
@@ -101,8 +102,8 @@
         "rules/noConditionalAssignmentRule.ts",
         "rules/noConsecutiveBlankLinesRule.ts",
         "rules/noConsoleRule.ts",
-        "rules/noConstructRule.ts",
         "rules/noConstructorVarsRule.ts",
+        "rules/noConstructRule.ts",
         "rules/noDebuggerRule.ts",
         "rules/noDefaultExportRule.ts",
         "rules/noDuplicateKeyRule.ts",
