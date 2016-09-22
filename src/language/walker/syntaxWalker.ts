@@ -659,6 +659,14 @@ export class SyntaxWalker {
     }
 
     protected walkChildren(node: ts.Node) {
-        ts.forEachChild(node, (child) => this.visitNode(child));
+      ts.forEachChild(node, (child) => {
+        try {
+          return this.visitNode(child);
+        } catch (e) {
+          throw new Error(`error while visiting node ${child.getSourceFile().fileName}:${child.getStart()}
+${child.getFullText()}
+  ${e.message}`);
+        }
+      });
     }
 }

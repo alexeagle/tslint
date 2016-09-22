@@ -4,6 +4,8 @@ function foo(a: {}) {
   if (isBlank(a)) {
       ~~~~~~~~~~ [inline]
   }
+  // Sometimes we have no symbol associated with the method
+  (a as any).toString();
   isBlank(a);
   ~~~~~~~~~~ [inline]
   isBlank(a || {});

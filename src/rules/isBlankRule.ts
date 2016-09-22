@@ -26,7 +26,7 @@ class Walker extends Lint.ProgramAwareRuleWalker {
         // TODO: utility function isFunctionNamed("isBlank");
         const tc = this.getTypeChecker();
         const sym = tc.getSymbolAtLocation(node.expression);
-        if (sym.name === "isBlank") {
+        if (sym && sym.name === "isBlank") {
             // TODO: utility function typeOfArg(0)
             const arg0 = node.arguments[0];
             const arg0Type = tc.getTypeAtLocation(arg0);
