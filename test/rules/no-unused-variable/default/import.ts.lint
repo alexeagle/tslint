@@ -13,6 +13,10 @@ import {a5, a6} from "modA";
             ~~                [Unused import: 'a6']
 import {a7} from "modA";
         ~~                    [Unused import: 'a7']
+import {a8, a9, a10} from "modA";
+            ~~                [Unused import: 'a9']
+                ~~~           [Unused import: 'a10']
+a8;
 
 export import a = require("a");
 

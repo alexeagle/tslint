@@ -399,8 +399,11 @@ class NoUnusedVariablesWalker extends Lint.RuleWalker {
     }
 
     private fail(type: string, name: string, position: number, replacements?: Lint.Replacement[]) {
-        this.addFailure(this.createFailure(position, name.length, Rule.FAILURE_STRING_FACTORY(type, name),
-            replacements ? new Lint.Fix("no-unused-variable", replacements) : undefined));
+        let fix: Lint.Fix;
+        if (replacements && replacements.length) {
+            fix = new Lint.Fix("no-unused-variable", replacements);
+        }
+        this.addFailure(this.createFailure(position, name.length, Rule.FAILURE_STRING_FACTORY(type, name), fix));
     }
 
     private isIgnored(name: string) {

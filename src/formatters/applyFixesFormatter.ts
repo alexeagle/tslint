@@ -10,7 +10,7 @@ export class Formatter extends AbstractFormatter {
         for (const file of Object.keys(files)) {
             log.push(`Applying fixes to ${file}`);
             let content = fs.readFileSync(file, {encoding: "utf-8"});
-            const fixes = failures.filter(f => f.getFileName() === file).map(f => f.getFix());
+            const fixes = failures.filter(f => f.getFileName() === file).map(f => f.getFix()).filter(f => !!f);
             log.push(`Fixes: ${JSON.stringify(fixes)}`);
             content = Fix.applyAll(content, fixes);
             fs.writeFileSync(file, content, {encoding: "utf-8"});
