@@ -1,0 +1,19 @@
+import {isBlank, other} from './facade/lang';
+
+function foo(a: {}) {
+  if (isBlank(a)) {
+      ~~~~~~~~~~ [inline]
+  }
+  // Sometimes we have no symbol associated with the method
+  (a as any).toString();
+  if (isBlank(a) && a.isOptional) {
+      ~~~~~~~~~~ [inline]
+  }
+  isBlank(a);
+  ~~~~~~~~~~ [inline]
+  isBlank(a || {});
+  ~~~~~~~~~~~~~~~~ [inline]
+  isBlank("don't change strings");
+}
+
+[inline]: inline usages of isBlank
