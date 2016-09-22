@@ -106,7 +106,6 @@ function transformName(name: string) {
  */
 function loadRule(directory: string, ruleName: string) {
     const fullPath = path.join(directory, ruleName);
-    console.error("try load rule", ruleName, "from ", directory);
     if (fs.existsSync(fullPath + ".js")) {
         const ruleModule = require(fullPath);
         if (ruleModule && ruleModule.Rule) {

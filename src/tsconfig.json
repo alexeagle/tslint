@@ -47,6 +47,7 @@
         "utils.ts",
         "configs/latest.ts",
         "configs/recommended.ts",
+        "formatters/applyFixesFormatter.ts",
         "formatters/checkstyleFormatter.ts",
         "formatters/fileslistFormatter.ts",
         "formatters/index.ts",

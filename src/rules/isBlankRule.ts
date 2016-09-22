@@ -23,10 +23,15 @@ export class Rule extends Lint.Rules.TypedRule {
 
 class Walker extends Lint.ProgramAwareRuleWalker {
     public visitCallExpression(node: ts.CallExpression) {
-        // TODO: utility function isFunctionNamed("isBlank");
+        // TODO: utility function isFunctionNamed("isBlank", "declaringModuleName");
         const tc = this.getTypeChecker();
-        const sym = tc.getSymbolAtLocation(node.expression);
-        if (sym && sym.name === "isBlank") {
+        let sym = tc.getSymbolAtLocation(node.expression);
+        // tslint:disable-next-line
+        if (sym && sym.flags & ts.SymbolFlags.Alias) {
+            sym = tc.getAliasedSymbol(sym);
+        }
+        if (sym && sym.name === "isBlank" &&
+            sym.getDeclarations()[0].getSourceFile().fileName.indexOf("facade") >= 0) {
             // TODO: utility function typeOfArg(0)
             const arg0 = node.arguments[0];
             const arg0Type = tc.getTypeAtLocation(arg0);
@@ -37,11 +42,8 @@ class Walker extends Lint.ProgramAwareRuleWalker {
               const replacements = [
                 this.deleteText(node.getStart(), "isBlank".length + (parens ? 0 : 1)),
                 this.deleteText(node.getEnd() - 1, parens ? 0 : 1),
+                this.appendText(node.getStart(), "!"),
               ];
-              const booleanContext = node.parent.kind === ts.SyntaxKind.IfStatement;
-              if (!booleanContext) {
-                  replacements.push(this.appendText(node.getStart(), "!!"));
-              }
               this.addFailure(this.createFailure(node.getStart(), node.getWidth(), Rule.FAILURE, new Lint.Fix("is-blank", replacements)));
             }
         }

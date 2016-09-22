@@ -1,4 +1,4 @@
-import {isBlank, other} from './facade_lang';
+import {isBlank, other} from './facade/lang';
 
 function foo(a: {}) {
   if (isBlank(a)) {
@@ -6,6 +6,9 @@ function foo(a: {}) {
   }
   // Sometimes we have no symbol associated with the method
   (a as any).toString();
+  if (isBlank(a) && a.isOptional) {
+      ~~~~~~~~~~ [inline]
+  }
   isBlank(a);
   ~~~~~~~~~~ [inline]
   isBlank(a || {});
