@@ -39,6 +39,7 @@
         "../src/enableDisableRules.ts",
         "../src/formatterLoader.ts",
         "../src/formatters.ts",
+        "../src/formatters/applyFixesFormatter.ts",
         "../src/formatters/checkstyleFormatter.ts",
         "../src/formatters/fileslistFormatter.ts",
         "../src/formatters/index.ts",
