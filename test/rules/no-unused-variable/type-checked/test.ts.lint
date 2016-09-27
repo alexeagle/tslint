@@ -1,0 +1,7 @@
+// Repro #1569 - Token is not really unused
+import {Token, UsesToken} from './token';
+        ~~~~~                             [Unused import: 'Token']
+
+export class Used {
+  static foo = [UsesToken.T];
+}
