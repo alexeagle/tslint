@@ -16,8 +16,8 @@ export class Rule extends Lint.Rules.TypedRule {
 
     public static FAILURE = "inline usages of isBlank";
 
-    public applyWithProgram(sourceFile: ts.SourceFile, program: ts.Program): Lint.RuleFailure[] {
-        return this.applyWithWalker(new Walker(sourceFile, this.getOptions(), program));
+    public applyWithProgram(sourceFile: ts.SourceFile, ls: ts.LanguageService): Lint.RuleFailure[] {
+        return this.applyWithWalker(new Walker(sourceFile, this.getOptions(), ls.getProgram()));
     }
 }
 
