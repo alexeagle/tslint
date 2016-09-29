@@ -23,7 +23,6 @@ import * as path from "path";
 import * as ts from "typescript";
 
 import {Fix} from "./language/rule/rule";
-import {createCompilerOptions} from "./language/utils";
 import {LintError} from "./test/lintError";
 import * as parse from "./test/parse";
 import * as Linter from "./tslint";
@@ -48,6 +47,15 @@ export interface TestResult {
 export function runTest(testDirectory: string, rulesDirectory?: string | string[]): TestResult {
     const filesToLint = glob.sync(path.join(testDirectory, `**/*${MARKUP_FILE_EXTENSION}`));
     const tslintConfig = Linter.findConfiguration(path.join(testDirectory, "tslint.json"), null);
+    const tsConfig = path.join(testDirectory, "tsconfig.json");
+    let compilerOptions: ts.CompilerOptions = {};
+    if (fs.existsSync(tsConfig)) {
+        const {config, error} = ts.readConfigFile(tsConfig, ts.sys.readFile);
+        if (error) {
+            throw new Error(JSON.stringify(error));
+        }
+        compilerOptions = ts.parseJsonConfigFileContent(config, {readDirectory: ts.sys.readDirectory}, testDirectory).options;
+    }
     const results: TestResult = { directory: testDirectory, results: {} };
 
     for (const fileToLint of filesToLint) {
@@ -59,7 +67,6 @@ export function runTest(testDirectory: string, rulesDirectory?: string | string[
 
         let program: ts.Program;
         if (tslintConfig.linterOptions && tslintConfig.linterOptions.typeCheck) {
-            const compilerOptions = createCompilerOptions();
             const compilerHost: ts.CompilerHost = {
                 fileExists: () => true,
                 getCanonicalFileName: (filename: string) => filename,
@@ -74,6 +81,9 @@ export function runTest(testDirectory: string, rulesDirectory?: string | string[
                         return ts.createSourceFile(filenameToGet, fileText, compilerOptions.target);
                     } else if (filenameToGet === fileCompileName) {
                         return ts.createSourceFile(fileBasename, fileTextWithoutMarkup, compilerOptions.target, true);
+                    } else if (fs.existsSync(path.resolve(path.dirname(fileToLint), filenameToGet))) {
+                        const text = fs.readFileSync(path.resolve(path.dirname(fileToLint), filenameToGet), {encoding: "utf-8"});
+                        return ts.createSourceFile(filenameToGet, text, compilerOptions.target, true);
                     }
                 },
                 readFile: () => null,
