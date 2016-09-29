@@ -86,6 +86,7 @@
         "rules/forinRule.ts",
         "rules/indentRule.ts",
         "rules/interfaceNameRule.ts",
+        "rules/isBlankRule.ts",
         "rules/jsdocFormatRule.ts",
         "rules/labelPositionRule.ts",
         "rules/labelUndefinedRule.ts",

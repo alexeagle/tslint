@@ -1,0 +1,14 @@
+import {isBlank, other} from './facade/lang';
+
+function foo(a: {}) {
+  if (!a) {
+  }
+  // Sometimes we have no symbol associated with the method
+  (a as any).toString();
+  if (!a && a.isOptional) {
+  }
+  !a;
+  !(a || {});
+  isBlank("don't change strings");
+}
+
