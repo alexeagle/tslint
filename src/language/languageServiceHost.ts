@@ -57,6 +57,9 @@ export function wrapProgram(program: ts.Program): ts.LanguageService {
 }
 
 export function checkEdit(ls: ts.LanguageService, sf: ts.SourceFile, newText: string) {
+    if (!("checkEdit" in Object.keys(ls))) {
+        return [];
+    }
     (ls as any).editFile(sf.fileName, newText);
     const newProgram = ls.getProgram();
     const newSf = newProgram.getSourceFile(sf.fileName);

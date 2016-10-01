@@ -1,0 +1,18 @@
+import {StringMapWrapper} from './facade/src/collection';
+
+let a = {};
+let b = a.hasOwnProperty( 'b');
+let c = Object.keys(a);
+let d = Object.keys(a).map(k => a[k]);
+let e = Object.keys(a).length === 0;
+Object.keys(a).forEach(k => { const v = a[k]; console.log(v, k); });
+Object.keys(config).forEach( k => { const v = config[k];  target.set(k, v) });
+const fn = (v, k) => k;
+"/* FIXME
+
+StringMapWrapper.forEach(obj, fn)
+*/;
+let f = StringMapWrapper.merge(a, {});
+StringMapWrapper.equals(a, f);
+Object.keys(directive.directive.outputs).forEach(k => { const eventName = directive.directive.outputs[k];
+    allDirectiveEvents.add(eventName); });

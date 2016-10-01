@@ -1,0 +1,30 @@
+import {StringMapWrapper} from './facade/src/collection';
+
+let a = StringMapWrapper.create();
+        ~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+let b = StringMapWrapper.contains(a, 'b');
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+let c = StringMapWrapper.keys(a);
+        ~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+let d = StringMapWrapper.values(a);
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+let e = StringMapWrapper.isEmpty(a);
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+StringMapWrapper.forEach(a, (v,k) => {console.log(v, k); });
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+StringMapWrapper.forEach(config, (v: Function, k: string) => target.set(k, v));
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+const fn = (v, k) => k;
+StringMapWrapper.forEach(obj, fn);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+let f = StringMapWrapper.merge(a, StringMapWrapper.create());
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+StringMapWrapper.equals(a, f);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  [inline usages of StringMapWrapper]
+StringMapWrapper.forEach(directive.directive.outputs, (eventName: string) => {
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    allDirectiveEvents.add(eventName);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+});
+~~  [inline usages of StringMapWrapper]
